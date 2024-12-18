@@ -125,15 +125,15 @@ fn a_star(alloc: Allocator, array: *Array, start: Vec2, goal: Vec2) !?std.ArrayL
 
         for (dirs) |dir| {
             const neighbor = current.pos.add(dir);
-            const neigbor_item = array.at(neighbor.y, neighbor.x);
-            if (neigbor_item == null or neigbor_item.?.* != '.') continue;
-            const d_to_neigbor: u64 = if (dir.x == current.direction.x and dir.y == current.direction.y) 1 else 1001;
-            const neigbor_g_score = current_g_score + d_to_neigbor;
-            const recorded_neigbor_g_score = g_scores.get(neighbor) orelse std.math.maxInt(u64);
-            if (neigbor_g_score < recorded_neigbor_g_score) {
+            const neighbor_item = array.at(neighbor.y, neighbor.x);
+            if (neighbor_item == null or neighbor_item.?.* != '.') continue;
+            const d_to_neighbor: u64 = if (dir.x == current.direction.x and dir.y == current.direction.y) 1 else 1001;
+            const neighbor_g_score = current_g_score + d_to_neighbor;
+            const recorded_neighbor_g_score = g_scores.get(neighbor) orelse std.math.maxInt(u64);
+            if (neighbor_g_score < recorded_neighbor_g_score) {
                 try came_from.put(neighbor, current.pos);
-                try g_scores.put(neighbor, neigbor_g_score);
-                try f_scores.put(neighbor, neigbor_g_score + h(neighbor, goal));
+                try g_scores.put(neighbor, neighbor_g_score);
+                try f_scores.put(neighbor, neighbor_g_score + h(neighbor, goal));
 
                 var contains = false;
                 for (open_set.items) |item| {
