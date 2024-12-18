@@ -207,7 +207,7 @@ fn part1(alloc: Allocator, input: []const u8) !?u64 {
         for (0..width) |col| {
             const pos = Position{ .row = @intCast(row), .col = @intCast(col) };
             if (seen.contains(pos)) continue;
-            const item = array.at(pos.row, pos.col) orelse unreachable;
+            const item = array.at(pos.row, pos.col).?;
 
             var region = Region{
                 .positions = try std.ArrayList(Position).initCapacity(alloc, 128),
@@ -253,7 +253,7 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
         for (0..width) |col| {
             const pos = Position{ .row = @intCast(row), .col = @intCast(col) };
             if (seen.contains(pos)) continue;
-            const item = array.at(pos.row, pos.col) orelse unreachable;
+            const item = array.at(pos.row, pos.col).?;
 
             var region = Region{
                 .positions = try std.ArrayList(Position).initCapacity(alloc, 128),

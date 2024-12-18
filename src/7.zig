@@ -47,7 +47,7 @@ fn part1(alloc: Allocator, input: []const u8) !?u64 {
         if (line.len == 0) continue;
         nums.clearRetainingCapacity();
 
-        const colon_idx = std.mem.indexOfScalar(u8, line, ':') orelse unreachable;
+        const colon_idx = std.mem.indexOfScalar(u8, line, ':').?;
         const target = std.fmt.parseInt(u64, line[0..colon_idx], 10) catch unreachable;
 
         var operand_iter = std.mem.splitScalar(u8, line[colon_idx + 2 ..], ' ');
@@ -84,7 +84,7 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
         if (line.len == 0) continue;
         nums.clearRetainingCapacity();
 
-        const colon_idx = std.mem.indexOfScalar(u8, line, ':') orelse unreachable;
+        const colon_idx = std.mem.indexOfScalar(u8, line, ':').?;
         const target = std.fmt.parseInt(u64, line[0..colon_idx], 10) catch unreachable;
 
         var operand_iter = std.mem.splitScalar(u8, line[colon_idx + 2 ..], ' ');

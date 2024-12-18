@@ -141,7 +141,7 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
             };
 
             // clear file at the end of fs
-            @memset(slice[slice.len - file_size..], FREE_BLOCK);
+            @memset(slice[slice.len - file_size ..], FREE_BLOCK);
             // set file in the free spot
             @memset(slice[free_space_idx..][0..file_size], file_id);
 

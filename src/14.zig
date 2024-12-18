@@ -35,7 +35,7 @@ pub fn main() !void {
 const Vec2 = struct { x: i64, y: i64 };
 
 fn parseVec2(input: []const u8) Vec2 {
-    const comma_idx = std.mem.indexOfScalar(u8, input, ',') orelse unreachable;
+    const comma_idx = std.mem.indexOfScalar(u8, input, ',').?;
     const x = std.fmt.parseInt(i64, input[0..comma_idx], 10) catch unreachable;
     const y = std.fmt.parseInt(i64, input[comma_idx + 1 ..], 10) catch unreachable;
     return .{ .x = x, .y = y };
@@ -50,10 +50,10 @@ fn part1(alloc: Allocator, input: []const u8, comptime room_size: Vec2) !?u64 {
     var lines_iter = std.mem.splitScalar(u8, input, '\n');
     while (lines_iter.next()) |line| {
         if (line.len == 0) continue;
-        var equal_idx = std.mem.indexOfScalar(u8, line, '=') orelse unreachable;
-        const space_idx = std.mem.indexOfScalar(u8, line, ' ') orelse unreachable;
+        var equal_idx = std.mem.indexOfScalar(u8, line, '=').?;
+        const space_idx = std.mem.indexOfScalar(u8, line, ' ').?;
         const p = parseVec2(line[equal_idx + 1 .. space_idx]);
-        equal_idx = std.mem.indexOfScalar(u8, line[space_idx..], '=') orelse unreachable;
+        equal_idx = std.mem.indexOfScalar(u8, line[space_idx..], '=').?;
         const v = parseVec2(line[space_idx + equal_idx + 1 ..]);
 
         const final_position = Vec2{ .x = p.x + v.x * SIMULATION_STEPS, .y = p.y + v.y * SIMULATION_STEPS };
@@ -119,10 +119,10 @@ fn part2(alloc: Allocator, input: []const u8, comptime room_size: Vec2) !?u64 {
     var lines_iter = std.mem.splitScalar(u8, input, '\n');
     while (lines_iter.next()) |line| {
         if (line.len == 0) continue;
-        var equal_idx = std.mem.indexOfScalar(u8, line, '=') orelse unreachable;
-        const space_idx = std.mem.indexOfScalar(u8, line, ' ') orelse unreachable;
+        var equal_idx = std.mem.indexOfScalar(u8, line, '=').?;
+        const space_idx = std.mem.indexOfScalar(u8, line, ' ').?;
         const p = parseVec2(line[equal_idx + 1 .. space_idx]);
-        equal_idx = std.mem.indexOfScalar(u8, line[space_idx..], '=') orelse unreachable;
+        equal_idx = std.mem.indexOfScalar(u8, line[space_idx..], '=').?;
         const v = parseVec2(line[space_idx + equal_idx + 1 ..]);
 
         try bots.append(.{ .pos = p, .dir = v });

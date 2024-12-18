@@ -119,8 +119,8 @@ fn part1(alloc: Allocator, input: []const u8) !?u64 {
     var lines_iter = std.mem.splitScalar(u8, input, '\n');
 
     inline for ([_]*u64{ &state.A, &state.B, &state.C }) |ptr| {
-        const line = lines_iter.next() orelse unreachable;
-        const idx = std.mem.indexOf(u8, line, ": ") orelse unreachable;
+        const line = lines_iter.next().?;
+        const idx = std.mem.indexOf(u8, line, ": ").?;
         ptr.* = std.fmt.parseUnsigned(u64, line[idx + 2 ..], 10) catch unreachable;
     }
 
@@ -129,8 +129,8 @@ fn part1(alloc: Allocator, input: []const u8) !?u64 {
 
     {
         _ = lines_iter.next();
-        const line = lines_iter.next() orelse unreachable;
-        const idx = std.mem.indexOf(u8, line, ": ") orelse unreachable;
+        const line = lines_iter.next().?;
+        const idx = std.mem.indexOf(u8, line, ": ").?;
         var opcode_iter = std.mem.splitScalar(u8, line[idx + 2 ..], ',');
         while (opcode_iter.next()) |opcode| {
             const op = std.fmt.parseUnsigned(u3, opcode, 10) catch unreachable;
@@ -160,8 +160,8 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
     var lines_iter = std.mem.splitScalar(u8, input, '\n');
 
     inline for ([_]*u64{ &state.A, &state.B, &state.C }) |ptr| {
-        const line = lines_iter.next() orelse unreachable;
-        const idx = std.mem.indexOf(u8, line, ": ") orelse unreachable;
+        const line = lines_iter.next().?;
+        const idx = std.mem.indexOf(u8, line, ": ").?;
         ptr.* = std.fmt.parseUnsigned(u64, line[idx + 2 ..], 10) catch unreachable;
     }
 
@@ -170,8 +170,8 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
 
     {
         _ = lines_iter.next();
-        const line = lines_iter.next() orelse unreachable;
-        const idx = std.mem.indexOf(u8, line, ": ") orelse unreachable;
+        const line = lines_iter.next().?;
+        const idx = std.mem.indexOf(u8, line, ": ").?;
         var opcode_iter = std.mem.splitScalar(u8, line[idx + 2 ..], ',');
         while (opcode_iter.next()) |opcode| {
             const op = std.fmt.parseUnsigned(u3, opcode, 10) catch unreachable;

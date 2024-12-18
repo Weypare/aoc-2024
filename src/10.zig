@@ -65,7 +65,7 @@ const PositionIter = struct {
 };
 
 fn collectReachableTrailends(array: *const Array, start: Position, reachable_trailends: *std.AutoHashMap(Position, usize)) !void {
-    const v = array.at(start.row, start.col) orelse unreachable;
+    const v = array.at(start.row, start.col).?;
     if (v.* == '9') {
         const get_or_put = try reachable_trailends.getOrPut(start);
         if (get_or_put.found_existing) {
@@ -108,7 +108,7 @@ fn part1(alloc: Allocator, input: []const u8) !?u64 {
     for (0..height) |row| {
         for (0..width) |col| {
             const p = .{ .col = @as(isize, @intCast(col)), .row = @as(isize, @intCast(row)) };
-            const v = array.at(p.row, p.col) orelse unreachable;
+            const v = array.at(p.row, p.col).?;
             if (v.* == '0') {
                 var reachable_trailends = std.AutoHashMap(Position, usize).init(alloc);
                 defer reachable_trailends.deinit();
@@ -138,7 +138,7 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
     for (0..height) |row| {
         for (0..width) |col| {
             const p = .{ .col = @as(isize, @intCast(col)), .row = @as(isize, @intCast(row)) };
-            const v = array.at(p.row, p.col) orelse unreachable;
+            const v = array.at(p.row, p.col).?;
             if (v.* == '0') {
                 var reachable_trailends = std.AutoHashMap(Position, usize).init(alloc);
                 defer reachable_trailends.deinit();

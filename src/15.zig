@@ -63,7 +63,7 @@ const Direction = struct {
 fn part1(alloc: Allocator, input: []u8) !?u64 {
     _ = alloc;
 
-    const input_parts_split_point = std.mem.indexOf(u8, input, "\n\n") orelse unreachable;
+    const input_parts_split_point = std.mem.indexOf(u8, input, "\n\n").?;
     const map = input[0..input_parts_split_point];
     const moves = input[input_parts_split_point + 2 ..];
 
@@ -148,7 +148,7 @@ fn part1(alloc: Allocator, input: []u8) !?u64 {
 }
 
 fn part2(alloc: Allocator, input: []u8) !?u64 {
-    const input_parts_split_point = std.mem.indexOf(u8, input, "\n\n") orelse unreachable;
+    const input_parts_split_point = std.mem.indexOf(u8, input, "\n\n").?;
     const input_map = input[0..input_parts_split_point];
     const moves = input[input_parts_split_point + 2 ..];
 

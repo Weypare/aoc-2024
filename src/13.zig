@@ -36,12 +36,12 @@ fn parseClawBlock(input: []const u8) struct { Vec2, Vec2, Vec2 } {
     var b: Vec2 = undefined;
     {
         for ([_]*Vec2{ &a, &b }) |v| {
-            var line = lines_iter.next() orelse unreachable;
-            const x_idx = std.mem.indexOfScalar(u8, line, 'X') orelse unreachable;
+            var line = lines_iter.next().?;
+            const x_idx = std.mem.indexOfScalar(u8, line, 'X').?;
             line = line[x_idx + 1 ..];
-            const comma_idx = std.mem.indexOfScalar(u8, line, ',') orelse unreachable;
+            const comma_idx = std.mem.indexOfScalar(u8, line, ',').?;
             const x = std.fmt.parseInt(i64, line[0..comma_idx], 10) catch unreachable;
-            const y_idx = std.mem.indexOfScalar(u8, line, 'Y') orelse unreachable;
+            const y_idx = std.mem.indexOfScalar(u8, line, 'Y').?;
             line = line[y_idx + 1 ..];
             const y = std.fmt.parseInt(i64, line, 10) catch unreachable;
             v.* = .{ .x = x, .y = y };
@@ -49,12 +49,12 @@ fn parseClawBlock(input: []const u8) struct { Vec2, Vec2, Vec2 } {
     }
     var p: Vec2 = undefined;
     {
-        var line = lines_iter.next() orelse unreachable;
-        var equals_idx = std.mem.indexOfScalar(u8, line, '=') orelse unreachable;
+        var line = lines_iter.next().?;
+        var equals_idx = std.mem.indexOfScalar(u8, line, '=').?;
         line = line[equals_idx + 1 ..];
-        const comma_idx = std.mem.indexOfScalar(u8, line, ',') orelse unreachable;
+        const comma_idx = std.mem.indexOfScalar(u8, line, ',').?;
         const x = std.fmt.parseInt(i64, line[0..comma_idx], 10) catch unreachable;
-        equals_idx = std.mem.indexOfScalar(u8, line, '=') orelse unreachable;
+        equals_idx = std.mem.indexOfScalar(u8, line, '=').?;
         line = line[equals_idx + 1 ..];
         const y = std.fmt.parseInt(i64, line, 10) catch unreachable;
         p = .{ .x = x, .y = y };

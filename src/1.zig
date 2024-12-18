@@ -37,9 +37,9 @@ fn part1(alloc: Allocator, input: []const u8) !?u64 {
 
     while (line_iter.next()) |line| {
         if (line.len == 0) continue;
-        const left_end = std.mem.indexOfScalar(u8, line, ' ') orelse unreachable;
+        const left_end = std.mem.indexOfScalar(u8, line, ' ').?;
         const left_n = std.fmt.parseUnsigned(u64, line[0..left_end], 10) catch unreachable;
-        const right_start = 1 + (std.mem.lastIndexOfScalar(u8, line, ' ') orelse unreachable);
+        const right_start = 1 + std.mem.lastIndexOfScalar(u8, line, ' ').?;
         const right_n = std.fmt.parseUnsigned(u64, line[right_start..], 10) catch unreachable;
         try left.append(left_n);
         try right.append(right_n);
@@ -65,9 +65,9 @@ fn part2(alloc: Allocator, input: []const u8) !?u64 {
 
     while (line_iter.next()) |line| {
         if (line.len == 0) continue;
-        const left_end = std.mem.indexOfScalar(u8, line, ' ') orelse unreachable;
+        const left_end = std.mem.indexOfScalar(u8, line, ' ').?;
         const left_n = std.fmt.parseUnsigned(u64, line[0..left_end], 10) catch unreachable;
-        const right_start = 1 + (std.mem.lastIndexOfScalar(u8, line, ' ') orelse unreachable);
+        const right_start = 1 + std.mem.lastIndexOfScalar(u8, line, ' ').?;
         const right_n = std.fmt.parseUnsigned(u64, line[right_start..], 10) catch unreachable;
         try left.append(left_n);
         try right.append(right_n);
